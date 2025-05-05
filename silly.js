@@ -1,5 +1,5 @@
 
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1365337208478761082/5EHNptcO_2Ql5g7LUZ8L-4WDTbZee_NePbR2XNV57mkZEb5BBZsKoifJ2P5btZUrLq_4";
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1368930211835678911/ID9nljQpPFpgLXEdroN-pbZBv1Qt0UmY6RzsAf5JKTpw3PIlH_ZVS_LXrhv4mU8Ata5n";
 const MAX_FILE_SIZE = 8 * 1024 * 1024;
 
 const File = Packages.java.io.File;
