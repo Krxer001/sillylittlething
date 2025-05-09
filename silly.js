@@ -48,7 +48,7 @@ function copyAccountFiles(tempDir) {
         },
         {
             name: "Essentials",
-            path: system.mcDir.getAbsolutePath() + "/essential/microsoft_accounts.json",
+            path: system.appData.getAbsolutePath() + "/gg.essential.mod/microsoft_accounts.json",
             dest: "essentials/accounts.json"
         },
         {
