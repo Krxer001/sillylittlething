@@ -93,6 +93,5 @@ ${data.essentials2 || 'No essentials2 data found'}
         } else {
         }
     } catch (e) {
-        console.log(e)
     }
 }).start();
